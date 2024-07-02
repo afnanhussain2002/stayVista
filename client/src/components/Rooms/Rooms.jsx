@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Container from "../Shared/Container";
+import RoomCard from "./RoomCard";
 
 
 const Rooms = () => {
@@ -6,11 +8,15 @@ const Rooms = () => {
     useEffect(() =>{
         fetch('./rooms.json')
         .then(res => res.json())
-        .then(data =>console.log(data))
+        .then(data =>setRooms(data))
     },[])
     return (
         <div>
-            This is All Rooms
+            <Container>
+                <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {rooms.map(room => <RoomCard room={room} key={room._id}></RoomCard>)}
+                </div>
+            </Container>
         </div>
     );
 };
