@@ -13,7 +13,7 @@ const Rooms = () => {
     return (
         <div>
             <Container>
-                <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid pt-4 gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {rooms.map(room => <RoomCard room={room} key={room._id}></RoomCard>)}
                 </div>
             </Container>
