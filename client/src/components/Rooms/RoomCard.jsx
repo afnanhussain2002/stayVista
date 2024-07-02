@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 const RoomCard = ({ room }) => {
   return (
+    <Link to={`/room/${room._id}`}>
     <div className="flex flex-col gap-2 w-full group">
       <div
         className="
@@ -36,6 +39,7 @@ const RoomCard = ({ room }) => {
         <div className="font-light">night</div>
       </div>
     </div>
+    </Link>
   );
 };
 
