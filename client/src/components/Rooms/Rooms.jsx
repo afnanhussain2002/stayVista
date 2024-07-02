@@ -3,13 +3,16 @@ import Container from "../Shared/Container";
 import RoomCard from "./RoomCard";
 import { useSearchParams } from "react-router-dom";
 import Heading from "../Shared/heading/Heading";
+import Loader from "../Shared/Loader";
 
 
 const Rooms = () => {
     const [rooms, setRooms] = useState([])
+    const [loading, setLoading] = useState(true)
     const [params, setParams] = useSearchParams()
     const category = params.get('category')
     useEffect(() =>{
+        setLoading(true)
         fetch('./rooms.json')
         .then(res => res.json())
         .then(data =>{
@@ -19,8 +22,10 @@ const Rooms = () => {
             }else{
                 setRooms(data)
             }
+            setLoading(false)
         })
     },[category])
+    if (loading) return <Loader/>
     return (
         <div>
             <Container>
