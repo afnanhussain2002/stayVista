@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Container from "../../components/Shared/Container";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Shared/Loader";
+import { Helmet } from "react-helmet-async";
 
 
 const RoomDetails = () => {
@@ -20,11 +21,12 @@ const RoomDetails = () => {
     },[id])
     if (loading) return <Loader/>
     return (
-        <div>
+        <>
             <Container>
+        <Helmet><title>{room.title}</title></Helmet>
                 <h3>{room.title}</h3>
             </Container>
-        </div>
+        </>
     );
 };
 
