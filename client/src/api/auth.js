@@ -20,3 +20,10 @@ export const getToken = async email =>{
     
     return data
 }
+// clear the cookie
+export const clearCookie = async () =>{
+    const {data} = await axiosSecure.get('/logout')
+    console.log('Token Removed form cookie ----');
+    
+    return data
+}

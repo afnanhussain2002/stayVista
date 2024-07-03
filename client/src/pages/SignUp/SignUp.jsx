@@ -7,8 +7,10 @@ import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
-  const {createUser, updateUserProfile, loading} = useAuth()
+  const {createUser, updateUserProfile, loading, signInWithGoogle} = useAuth()
   const navigate = useNavigate()
+
+  // sign up with email
   const handleForm = async e =>{
     e.preventDefault()
     const form = e.target;
@@ -46,6 +48,31 @@ const SignUp = () => {
       toast.error(error?.message)
     }
 
+  }
+  // sign with google
+  const handleGoogleSign = async() =>{
+
+    try {
+ 
+    // user registration with google
+    const result = await signInWithGoogle()
+  
+    // save user on database
+    const saveOnDB = await saveUser(result.user)
+  
+    // get token
+    await getToken(result?.user?.email)
+  
+    toast.success('SignUp Successfully ')
+    navigate('/')
+    
+    console.log(result);
+    console.log(saveOnDB);
+  
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.message)
+    }
   }
   return (
     <div className='flex justify-center items-center min-h-screen'>
@@ -134,7 +161,7 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+        <div onClick={handleGoogleSign} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
