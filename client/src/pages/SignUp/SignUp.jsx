@@ -5,7 +5,6 @@ import useAuth from '../../hooks/useAuth'
 
 const SignUp = () => {
   const {createUser, updateUserProfile} = useAuth()
-  const navigate = useNavigate()
   const handleForm = async e =>{
     e.preventDefault()
     const form = e.target;
@@ -13,22 +12,24 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const imageData = await imageUpload(image)
-    const profileImage = imageData.data.display_url
+    
 
+    try {
+      // upload image
+      const imageData = await imageUpload(image)
+    const profileImage = imageData?.data?.display_url
 
-    createUser(email,password)
-    .then(res =>{
-      console.log(res.user);
-      updateUserProfile(name, profileImage)
-      .then(() =>{
-        console.log('Profile Also Updated');
-        navigate('/')
-      })
-      .catch(err => console.log(err))
+    // user registration
 
-    })
-    .catch(err => console.log(err))
+    const result = await createUser(email, password)
+
+    await updateUserProfile(name, profileImage)
+
+    console.log(result);
+
+    } catch (error) {
+      console.log(error);
+    }
 
   }
   return (
