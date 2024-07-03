@@ -1,7 +1,12 @@
+
 import Button from "../../Button/Button";
 import Calender from "../Calender/Calender";
 
 const RoomReservation = ({ room }) => {
+   /*  const totalDays = parseInt(formatDistance(new Date(room?.to), new Date(room?.from)))
+
+    const totalPrice = totalDays * room?.price
+   console.log(totalPrice); */
   return (
     <div className="rounded-xl border-[1px] border-neutral-200 overflow-hidden bg-white">
       <div className="flex items-center gap-1 p-4">

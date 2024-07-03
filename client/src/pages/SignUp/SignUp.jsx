@@ -1,7 +1,36 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
+import { imageUpload } from '../../api/utils'
+import useAuth from '../../hooks/useAuth'
 
 const SignUp = () => {
+  const {createUser, updateUserProfile} = useAuth()
+  const navigate = useNavigate()
+  const handleForm = async e =>{
+    e.preventDefault()
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+    const imageData = await imageUpload(image)
+    const profileImage = imageData.data.display_url
+
+
+    createUser(email,password)
+    .then(res =>{
+      console.log(res.user);
+      updateUserProfile(name, profileImage)
+      .then(() =>{
+        console.log('Profile Also Updated');
+        navigate('/')
+      })
+      .catch(err => console.log(err))
+
+    })
+    .catch(err => console.log(err))
+
+  }
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -10,6 +39,7 @@ const SignUp = () => {
           <p className='text-sm text-gray-400'>Welcome to StayVista</p>
         </div>
         <form
+          onSubmit={handleForm}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'

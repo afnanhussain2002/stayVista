@@ -5,10 +5,10 @@ const CategoryBox = ({ label, icon: Icon, selected }) => {
 const [params, setParams] = useSearchParams()
 const navigate = useNavigate()
 
-console.log(selected);
+
 
 const handleClick = () =>{
-    console.log(label);
+   
     let currentQuery = {}
     if (params) {
         currentQuery = qs.parse(params.toString())
