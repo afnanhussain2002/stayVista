@@ -18,6 +18,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'))
+//  middle wares
 const verifyToken = async (req, res, next) => {
   const token = req.cookies?.token
   console.log(token)

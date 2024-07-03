@@ -4,9 +4,10 @@ import { imageUpload } from '../../api/utils'
 import useAuth from '../../hooks/useAuth'
 import { getToken, saveUser } from '../../api/auth'
 import toast from 'react-hot-toast';
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
-  const {createUser, updateUserProfile} = useAuth()
+  const {createUser, updateUserProfile, loading} = useAuth()
   const navigate = useNavigate()
   const handleForm = async e =>{
     e.preventDefault()
@@ -122,7 +123,7 @@ const SignUp = () => {
               type='submit'
               className='bg-rose-500 w-full rounded-md py-3 text-white'
             >
-              Continue
+             {loading ? <TbFidgetSpinner/> : 'Continue'}
             </button>
           </div>
         </form>
