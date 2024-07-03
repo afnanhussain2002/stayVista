@@ -2,10 +2,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { imageUpload } from '../../api/utils'
 import useAuth from '../../hooks/useAuth'
-import { saveUser } from '../../api/auth'
+import { getToken, saveUser } from '../../api/auth'
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const {createUser, updateUserProfile} = useAuth()
+  const navigate = useNavigate()
   const handleForm = async e =>{
     e.preventDefault()
     const form = e.target;
@@ -28,12 +30,19 @@ const SignUp = () => {
     // save user on database
     const saveOnDB = await saveUser(result.user)
 
+    // get token
+
+    await getToken(result?.user?.email)
+
+    toast.success('SignUp Successfully ')
+    navigate('/')
     
     console.log(result);
     console.log(saveOnDB);
 
     } catch (error) {
       console.log(error);
+      toast.error(error?.message)
     }
 
   }
