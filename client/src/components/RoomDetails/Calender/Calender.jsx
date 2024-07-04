@@ -1,9 +1,10 @@
 import { DateRange } from 'react-date-range';
 
 
-const Calender = () => {
+const Calender = ({value}) => {
     return <DateRange
-      rangeColors={'#f34f5e'}
+      ranges={[value]}
+      rangeColors={['#f43f5e']}
       direction='vertical'
       showDateDisplay={false}
       

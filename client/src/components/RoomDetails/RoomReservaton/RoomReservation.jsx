@@ -1,8 +1,14 @@
 
+import { useState } from "react";
 import Button from "../../Button/Button";
 import Calender from "../Calender/Calender";
 
 const RoomReservation = ({ room }) => {
+  const [value,setValue] = useState({
+    startDate: new Date(room?.from),
+    endDate: new Date(room?.to),
+    key:'selection'
+  })
    /*  const totalDays = parseInt(formatDistance(new Date(room?.to), new Date(room?.from)))
 
     const totalPrice = totalDays * room?.price
@@ -15,7 +21,7 @@ const RoomReservation = ({ room }) => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Calender />
+        <Calender value={value}/>
       </div>
       <hr />
       <div className="p-4">
