@@ -72,12 +72,12 @@ const Sidebar = () => {
               <MenuItem
                 icon={IoHome}
                 label='Add Rome'
-                address='/add-room'
+                address='add-room'
               />
               <MenuItem
                 icon={MdMapsHomeWork}
                 label='My Listing'
-                address='/my-listing'
+                address='my-listing'
               />
             </nav>
           </div>
