@@ -6,6 +6,7 @@ import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import RoomDetails from '../pages/roomDetails/RoomDetails'
 import PrivateRoutes from './PrivateRoutes'
+import { getSingleRoom } from '../api/rooms'
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,8 @@ export const router = createBrowserRouter([
       },
       {
         path:'/room/:id',
-        element:<PrivateRoutes><RoomDetails/></PrivateRoutes>
+        element:<PrivateRoutes><RoomDetails/></PrivateRoutes>,
+        loader:({params}) => getSingleRoom(params.id)
       }
     ],
   },

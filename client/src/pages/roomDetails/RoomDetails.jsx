@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import Container from "../../components/Shared/Container";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Shared/Loader";
@@ -8,7 +8,7 @@ import RoomInfo from "../../components/RoomDetails/RoomInfo/RoomInfo";
 import RoomReservation from "../../components/RoomDetails/RoomReservaton/RoomReservation";
 
 const RoomDetails = () => {
-  const { id } = useParams();
+ /*  const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [room, setRoom] = useState({});
   useEffect(() => {
@@ -20,8 +20,9 @@ const RoomDetails = () => {
         setRoom(singleRoom);
         setLoading(false);
       });
-  }, [id]);
-  if (loading) return <Loader />;
+  }, [id]); */
+  // if (loading) return <Loader />;
+  const room = useLoaderData()
   return (
     <>
       <Container>
