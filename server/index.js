@@ -113,9 +113,9 @@ async function run() {
     })
 
     // Save a room in database
-    app.post('/rooms',verifyToken,async (req,res) =>{
+    app.post('/rooms',verifyToken, async (req,res) =>{
       const room = req.body;
-      const result = roomsCollection.insertOne(room)
+      const result = await roomsCollection.insertOne(room)
       res.send(result)
     })
 
