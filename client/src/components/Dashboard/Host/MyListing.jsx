@@ -12,7 +12,8 @@ const MyListings = () => {
         .then(data =>{
             setRooms(data)
         })
-    })
+
+    },[user])
   return (
     <>
       <Helmet>
