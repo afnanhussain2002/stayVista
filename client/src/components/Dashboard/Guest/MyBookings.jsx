@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import useAuth from '../../../hooks/useAuth'
 import { useQuery } from '@tanstack/react-query'
 import { getBookings } from '../../../api/booking'
+import TableRow from '../TableRow/TableRows'
 
 const MyBookings = () => {
     const { user, loading } = useAuth()
@@ -66,7 +67,14 @@ const MyBookings = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody>{/* Table Row Data */}</tbody>
+                <tbody>
+                    {/* Table Row Data */}
+                    {bookings &&
+                    bookings.map(booking => (
+                      <TableRow key={booking._id} booking={booking} />
+                    ))}
+
+                </tbody>
               </table>
             </div>
           </div>
