@@ -1,10 +1,16 @@
+import MenuItem from "./MenuItem";
+import {FaUserCog} from 'react-icons/fa'
 
 
 const AdminMenu = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <MenuItem
+                icon={FaUserCog}
+                label='Manage Users'
+                address='manage-users'
+              /> 
+        </>
     );
 };
 
