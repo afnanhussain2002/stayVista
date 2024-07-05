@@ -1,6 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { format } from 'date-fns'
 import { Fragment } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from '../Form/CheckoutForm'
+const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk)
 
 const BookingModal = ({ closeModal, isOpen, bookingInfo }) => {
   return (
@@ -9,7 +13,7 @@ const BookingModal = ({ closeModal, isOpen, bookingInfo }) => {
         <Transition.Child
           as={Fragment}
           enter='ease-out duration-300'
-          enterFrom='opacity-0'
+          enterFrom='opacity-0' 
           enterTo='opacity-100'
           leave='ease-in duration-200'
           leaveFrom='opacity-100'
@@ -65,6 +69,10 @@ const BookingModal = ({ closeModal, isOpen, bookingInfo }) => {
                 </div>
                 <hr className='mt-8 ' />
                 {/* Card data form */}
+                {/* checkout form */}
+                <Elements stripe={stripePromise}>
+                  <CheckoutForm closeModal={closeModal}/>
+                </Elements>
               </Dialog.Panel>
             </Transition.Child>
           </div>
