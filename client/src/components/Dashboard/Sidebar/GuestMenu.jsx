@@ -1,10 +1,16 @@
+import MenuItem from "./MenuItem";
+import { BsFingerprint } from "react-icons/bs";
 
 
 const GuestMenu = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+             <MenuItem
+                icon={BsFingerprint}
+                label='My Bookings'
+                address='my-bookings'
+              />
+        </>
     );
 };
 
