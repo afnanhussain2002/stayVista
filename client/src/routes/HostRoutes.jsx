@@ -4,9 +4,9 @@ import Loader from "../components/Shared/Loader";
 
 
 const HostRoutes = ({children}) => {
-    const [role, loading] = useRole()
+    const [role, isLoading] = useRole()
 
-    if (loading) return <Loader/>
+    if (isLoading) return <Loader/>
     if (role === 'host') return children
     return <Navigate to={'/dashboard'} replace={true}/>
 };
