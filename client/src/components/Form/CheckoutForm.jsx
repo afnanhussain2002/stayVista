@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './CheckoutForm.css'
 import useAuth from '../../hooks/useAuth'
 import { ImSpinner9 } from 'react-icons/im'
@@ -13,6 +13,9 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const [processing, setProcessing] = useState(false)
 
   // Create Payment Intent
+  useEffect(() => {
+    
+  },[bookingInfo])
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -107,7 +110,7 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
             {processing ? (
               <ImSpinner9 className='m-auto animate-spin' size={24} />
             ) : (
-              `Pay ${bookingInfo.price}$`
+              `Pay $${bookingInfo.price}`
             )}
           </button>
         </div>
