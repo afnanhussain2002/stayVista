@@ -49,7 +49,7 @@ const {user} = useAuth()
       </div>
       <hr />
       <div className="p-4">
-        <Button disabled={room.host.email === user.email || room.booked} label={"Reserve"} onClick={() => setIsOpen(true)}/>
+        <Button  disabled={room.host.email === user.email || room.booked} label={"Reserve"} onClick={() => setIsOpen(true)}/>
       </div>
       <hr />
       <div className="p-4 flex items-center justify-between font-semibold text-lg">

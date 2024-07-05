@@ -13,6 +13,7 @@ import MyListing from "../components/Dashboard/Host/MyListing";
 import HostRoutes from "./HostRoutes";
 import Profile from "../components/Dashboard/Profile/Profile";
 import MyBookings from "../components/Dashboard/Guest/MyBookings";
+import ManageBookings from "../components/Dashboard/Host/ManageBookings/ManageBookings";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,15 @@ export const router = createBrowserRouter([
       {
         path:'my-bookings',
         element:<PrivateRoutes> <MyBookings/> </PrivateRoutes> 
+
+      },
+      {
+        path:'manage-bookings',
+        element:<PrivateRoutes> 
+          <HostRoutes>
+          <ManageBookings/> 
+          </HostRoutes> 
+          </PrivateRoutes> 
 
       },
     ],

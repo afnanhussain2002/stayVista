@@ -1,27 +1,29 @@
 import { Helmet } from 'react-helmet-async'
-import useAuth from '../../../hooks/useAuth'
-import { useQuery } from '@tanstack/react-query'
-import { getBookings } from '../../../api/booking'
-import TableRow from '../TableRow/TableRows'
-import Loader from '../../Shared/Loader'
 
-const MyBookings = () => {
-    const { user, loading } = useAuth()
-    const {
-      data: bookings = [],
-      isLoading,
-      refetch,
-    } = useQuery({
-      queryKey: ['bookings', user?.email],
-      enabled: !loading,
-      queryFn: async () => await getBookings(user?.email),
-    })
-    console.log(bookings);
-    if (isLoading) return <Loader />
+import { useQuery } from '@tanstack/react-query'
+import useAuth from '../../../../hooks/useAuth'
+import { getHostBookings } from '../../../../api/booking'
+import Loader from '../../../Shared/Loader'
+import TableRow from '../../TableRow/TableRows'
+
+const ManageBookings = () => {
+  const { user, loading } = useAuth()
+  console.log(user.email);
+  const {
+    data: bookings = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['bookings', user?.email],
+    enabled: !loading,
+    queryFn: async () => await getHostBookings(user?.email),
+  })
+  console.log(bookings)
+  if (isLoading) return <Loader />
   return (
     <>
       <Helmet>
-        <title>My Bookings</title>
+        <title>Manage Bookings</title>
       </Helmet>
 
       <div className='container mx-auto px-4 sm:px-8'>
@@ -41,7 +43,7 @@ const MyBookings = () => {
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Info
+                      Guest Info
                     </th>
                     <th
                       scope='col'
@@ -70,12 +72,11 @@ const MyBookings = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    {/* Table Row Data */}
-                    {bookings &&
+                  {/* Table row data */}
+                  {bookings &&
                     bookings.map(booking => (
                       <TableRow key={booking._id} booking={booking} />
                     ))}
-
                 </tbody>
               </table>
             </div>
@@ -86,4 +87,4 @@ const MyBookings = () => {
   )
 }
 
-export default MyBookings
+export default ManageBookings
