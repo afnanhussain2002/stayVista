@@ -12,6 +12,7 @@ import AddRoom from "../components/Dashboard/Host/AddRoom";
 import MyListing from "../components/Dashboard/Host/MyListing";
 import HostRoutes from "./HostRoutes";
 import Profile from "../components/Dashboard/Profile/Profile";
+import MyBookings from "../components/Dashboard/Guest/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -68,7 +69,12 @@ export const router = createBrowserRouter([
         path:'profile',
         element:<PrivateRoutes> <Profile/> </PrivateRoutes> 
 
-      }
+      },
+      {
+        path:'my-bookings',
+        element:<PrivateRoutes> <MyBookings/> </PrivateRoutes> 
+
+      },
     ],
   },
 ]);
