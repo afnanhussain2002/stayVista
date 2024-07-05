@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import "./CheckoutForm.css";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
-import { createPaymentIntent } from "../../api/booking";
+import { createPaymentIntent, saveBookingInfo, updateStatus } from "../../api/booking";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const stripe = useStripe();
@@ -12,6 +14,7 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
+  const navigate = useNavigate()
 
   // Create Payment Intent
   useEffect(() => {
@@ -77,6 +80,23 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
         transactionId: paymentIntent.id,
         date: new Date(),
       };
+
+      try {
+        // save payment information to the server
+        await saveBookingInfo(paymentInfo)
+        // update room status on database when room was booked
+        await updateStatus(bookingInfo.roomId, true)
+        const text = `Booking Successful! ${paymentInfo.id}`
+        toast.success(text)
+        // navigate the user after booking
+        navigate ('/dashboard/my-bookings')
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message)
+      }finally{
+        
+      setProcessing(false);
+      }
 
       setProcessing(false);
     }
