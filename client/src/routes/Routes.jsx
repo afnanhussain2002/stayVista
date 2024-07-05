@@ -11,6 +11,7 @@ import DashboardLayouts from "../layouts/DashboardLayouts";
 import AddRoom from "../components/Dashboard/Host/AddRoom";
 import MyListing from "../components/Dashboard/Host/MyListing";
 import HostRoutes from "./HostRoutes";
+import Profile from "../components/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,11 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path:'profile',
+        element:<PrivateRoutes> <Profile/> </PrivateRoutes> 
+
+      }
     ],
   },
 ]);
