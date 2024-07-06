@@ -1,7 +1,13 @@
+import { useState } from "react"
 import UpdateUserModal from "../../../Modal/UpdateUserModal/UpdateUserModal"
 
 const UserDataRow = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const modalHandler = async(selected) =>{
+      //update user role
+      console.log(selected);
+    }
+
     return (
       <tr>
         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -30,10 +36,10 @@ const UserDataRow = ({ user }) => {
               aria-hidden='true'
               className='absolute inset-0 bg-green-200 opacity-50 rounded-full'
             ></span>
-            <span className='relative'>Update Role</span>
+            <span onClick={() => setIsOpen(true)} className='relative'>Update Role</span>
           </span>
           {/* Modal */}
-          <UpdateUserModal isOpen={isOpen}/>
+          <UpdateUserModal isOpen={isOpen} user={user} setIsOpen={setIsOpen} modalHandler={modalHandler}/>
         </td>
       </tr>
     )
