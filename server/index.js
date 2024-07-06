@@ -50,6 +50,28 @@ async function run() {
     const usersCollection = client.db('stayVistaDB').collection('user')
     const roomsCollection = client.db('stayVistaDB').collection('rooms')
     const bookingsCollection = client.db('stayVistaDB').collection('bookings')
+
+      // Role verification middlewares
+    // For admins
+    const verifyAdmin = async (req, res, next) => {
+      const user = req.user
+      console.log('user from verify admin', user)
+      const query = { email: user?.email }
+      const result = await usersCollection.findOne(query)
+      if (!result || result?.role !== 'admin')
+        return res.status(401).send({ message: 'unauthorized access' })
+      next()
+    }
+
+    // For hosts
+    const verifyHost = async (req, res, next) => {
+      const user = req.user
+      const query = { email: user?.email }
+      const result = await usersCollection.findOne(query)
+      if (!result || result?.role !== 'host')
+        return res.status(401).send({ message: 'unauthorized access' })
+      next()
+    }
     // auth related api
     app.post('/jwt', async (req, res) => {
       const user = req.body
