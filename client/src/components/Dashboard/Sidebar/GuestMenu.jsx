@@ -5,8 +5,8 @@ import useRole from "../../../hooks/useRole";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import HostModal from "../../Modal/HostRequestModal/HostRequestModal";
-
-
+import toast from "react-hot-toast";
+import { becomeHost } from "../../../api/auth";
 
 
 const GuestMenu = () => {
@@ -17,9 +17,21 @@ const GuestMenu = () => {
         setIsOpen(false)
     }
     // request to become a host
-    const modalHandler = async() =>{
-console.log('request for host');
-    }
+    const modalHandler = async () => {
+        try {
+          const data = await becomeHost(user?.email)
+          console.log(data)
+          if (data.modifiedCount > 0) {
+            toast.success('Success!, Please wait for admin confirmation.')
+          } else {
+            toast.success('Please!, Wait for admin approval👊')
+          }
+        } catch (err) {
+          console.log(err)
+        } finally {
+          setIsOpen(false)
+        }
+      }
     return (
         <>
              <MenuItem
